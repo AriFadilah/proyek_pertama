@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoftCookies - Cookies Lembut Premium</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d63384;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #d63384;
+        }
+
+        .cart-btn, .wa-btn {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            text-decoration: none;
+            margin-left: 1rem;
+        }
+
+        .cart-btn {
+            background: #d63384;
+        }
+
+        .cart-btn:hover, .wa-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23ff9a9e" width="1200" height="600"/><circle fill="%23fecfef" cx="300" cy="200" r="150"/><circle fill="%23fad0c4" cx="900" cy="400" r="120"/><path fill="%23ffd1ff" d="M600 100Q700 50 800 100Q900 150 950 250Q900 350 800 400Q700 450 600 400Q500 450 400 400Q300 350 350 250Q400 150 500 100Z"/></svg>');
+            padding: 120px 2rem 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #d63384;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            color: #666;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #d63384, #c02569);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInUp 1s ease 0.4s both;
+            margin-right: 1rem;
+        }
+
+        .cta-button:hover, .wa-hero-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(214, 51, 132, 0.4);
+        }
+
+        .wa-hero-btn {
+            background: #25D366;
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            animation: fadeInUp 1s ease 0.6s both;
+        }
+
+        /* Products Section */
+        .products {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #d63384;
+            margin-bottom: 3rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+
+        .product-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d63384;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            background: #d63384;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            width: 48%;
+            margin-right: 4%;
+        }
+
+        .wa-direct {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s;
+            width: 48%;
+        }
+
+        .add-to-cart:hover, .wa-direct:hover {
+            transform: translateY(-2px);
+        }
+
+        /* WhatsApp Form Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+            outline: none;
+            border-color: #d63384;
+        }
+
+        .wa-send-btn {
+            width: 100%;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            padding: 1rem;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .wa-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
+        }
+
+        .order-summary {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+        }
+
+        /* Cart Modal */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 2000;
+            backdrop-filter: blur(5px);
+        }
+
+        .cart-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            float: right;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Floating WA Button */
+        .floating-wa {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background: linear-gradient(45deg, #25D366, #128C7E);
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 5px 20px rgba(37, 211, 102, 0.5);
+            z-index: 1000;
+            cursor: pointer;
+            transition: all 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .floating-wa:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.7);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .floating-wa {
+                bottom: 20px;
+                right: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">
+                <i class="fas fa-cookie-bite"></i> SoftCookies
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Produk</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <div>
+                <a href="#" class="wa-btn" onclick="openWAForm()">
+                    <i class="fab fa-whatsapp"></i> WA
+                </a>
+                <button class="cart-btn" onclick="toggleCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span id="cart-count">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>SoftCookies Premium</h1>
+        <p>Cookies lembut, manis, dan penuh cinta ❤️<br>
+        Dibuat segar setiap hari dengan bahan terbaik!</p>
+        <a href="#products" class="cta-button">Lihat Menu</a>
+        <button class="wa-hero-btn" onclick="openWAForm()">
+            <i class="fab fa-whatsapp"></i> Pesan via WA
+        </button>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="products">
+        <h2 class="section-title">Pilih Cookies Favoritmu</h2>
+        <div class="products-grid">
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-cookie"></i>
+                </div>
+                <h3>Classic Chocolate Chip</h3>
+                <div class="product-price">Rp 25.000</div>
+                <button class="add-to-cart" onclick="addToCart('Classic Chocolate Chip', 25000)">
+                    <i class="fas fa-cart-plus"></i> Keranjang
+                </button>
+                <button class="wa-direct" onclick="directWA('Classic Chocolate Chip - Rp25.000')">
+                    <i class="fab fa-whatsapp"></i> WA
+                </button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #a8e6cf, #dcedc1);">
+                    <i class="fas fa-lemon"></i>
+                </div>
+                <h3>Lemon Butter</h3>
+                <div class="product-price">Rp 28.000</div>
+                <button class="add-to-cart" onclick="addToCart('Lemon Butter', 28000)">
+                    <i class="fas fa-cart-plus"></i> Keranjang
+                </button>
+                <button class="wa-direct" onclick="directWA('Lemon Butter - Rp28.000')">
+                    <i class="fab fa-whatsapp"></i> WA
+                </button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #ffecd2, #fcb69f);">
+                    <i class="fas fa-strawberry"></i>
+                </div>
+                <h3>Strawberry Cream</h3>
+                <div class="product-price">Rp 30.000</div>
+                <button class="add-to-cart" onclick="addToCart('Strawberry Cream', 30000)">
+                    <i class="fas fa-cart-plus"></i> Keranjang
+                </button>
+                <button class="wa-direct" onclick="directWA('Strawberry Cream - Rp30.000')">
+                    <i class="fab fa-whatsapp"></i> WA
+                </button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #a1c4fd, #c2e9fb);">
+                    <i class="fas fa-magic"></i>
+                </div>
+                <h3>Matcha Green Tea</h3>
+                <div class="product-price">Rp 32.000</div>
+                <button class="add-to-cart" onclick="addToCart('Matcha Green Tea', 32000)">
+                    <i class="fas fa-cart-plus"></i> Keranjang
+                </button>
+                <button class="wa-direct" onclick="directWA('Matcha Green Tea - Rp32.000')">
+                    <i class="fab fa-whatsapp"></i> WA
+                </button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #d299c2, #fef9d7);">
+                    <i class="fas fa-pepper-hot"></i>
+                </div>
+                <h3>Spicy Cinnamon</h3>
+                <div class="product-price">Rp 27.000</div>
+                <button class="add-to-cart" onclick="addToCart('Spicy Cinnamon', 27000)">
+                    <i class="fas fa-cart-plus"></i> Keranjang
+                </button>
+                <button class="wa-direct" onclick="directWA('Spicy Cinnamon - Rp27.000')">
+                    <i class="fab fa-whatsapp"></i> WA
+                </button>
+            </div>
+
+            <div class="product-card">
+                <div class="product-image" style="background: linear-gradient(45deg, #ff9a9e, #fecfef);">
+                    <i class="fas fa-heart"></i>
+                </div>
+                <h3>Love Special Pack (6 pcs)</h3>
+                <div class="product-price">Rp 150.000</div>
+                <button class="add-to-cart" onclick="addToCart('Love Special Pack (6 pcs)', 150000)">
+                    <i class="fas fa-cart-plus"></i> Keranjang
+                </button>
+                <button class="wa-direct" onclick="directWA('Love Special Pack (6 pcs) - Rp150.000')">
+                    <i class="fab fa-whatsapp"></i> WA
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Order Form Modal -->
+    <div class="modal" id="waModal">
+        <div class="modal-content">
+            <button class="close-modal" onclick="closeWAForm()">&times;</button>
+            <h2><i class="fab fa-whatsapp"></i> Pesan via WhatsApp</h2>
+            <p style="color: #666; margin-bottom: 2rem;">Isi form dibawah ini, pesanan akan otomatis terkirim ke WA!</p>
+            
+            <div id="orderSummary" class="order-summary" style="display: none;">
+                <strong>Ringkasan Pesanan:</strong>
+                <div id="summaryList"></div>
+                <hr>
+                <strong>Total: <span id="summaryTotal">Rp 0</span></strong>
+            </div>
+
+            <form id="waForm">
+                <div class="form-group">
+                    <label>Nama Lengkap *</label>
+                    <input type="text" id="customerName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>No. WhatsApp *</label>
+                    <input type="tel" id="customerPhone" placeholder="085540186517" required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Alamat Pengiriman *</label>
+                    <textarea id="customerAddress" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Catatan Pesanan</label>
+                    <textarea id="orderNotes" rows="2" placeholder="Contoh: Bungkus rapi, kirim sore ya..."></textarea>
+                </div>
+                
+                <button type="submit" class="wa-send-btn">
+                    <i class="fab fa-whatsapp"></i> Kirim Pesanan ke WA
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-content">
+            <button class="close-modal" onclick="toggleCart()">&times;</button>
+            <h2><i class="fas fa-shopping-cart"></i> Keranjang Belanja</h2>
+            <div id="cartItems"></div>
+            <div style="margin-top: 2rem; padding-top: 1rem; border-top: 2px solid #eee;">
+                <h3>Total: <span id="cartTotal">Rp 0</span></h3>
+                <button style="width: 48%; background: #d63384; color: white; border: none; padding: 1rem; border-radius: 10px; font-size: 1.1rem; margin-right: 4%; cursor: pointer;" onclick="openWAForm()">
+                    <i class="fab fa-whatsapp"></i> Checkout WA
+                </button>
+                <button style="width: 48%; background: #28a745; color: white; border: none; padding: 1rem; border-radius: 10px; font-size: 1.1rem; cursor: pointer;" onclick="checkout()">
+                    Bayar Transfer
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="floating-wa" onclick="openWAForm()" title="Chat WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="social-links">
+            <a href="https://wa.me/6285540186517" target="_blank"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+        <p>&copy; 2024 SoftCookies. Dibuat dengan <i class="fas fa-heart" style="color: #d63384;"></i> untuk kamu!</p>
+        <p>WhatsApp: <a href="https://wa.me/6285540186517" style="color: #25D366;">0855-4018-6517</a> | Email: hello@softcookies.com</p>
+    </footer>
+
+    <script>
+        let cart = [];
+        const WA_NUMBER = '6285540186517'; // ✅ NOMOR KAMU SUDAH TERPASANG!
+
+        function addToCart(name, price) {
+            cart.push({ name, price, quantity: 1 });
+            updateCart();
+            showNotification(`${name} ditambahkan ke keranjang!`);
+        }
+
+        function updateCart() {
+            document.getElementById('cart-count').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+            displayCartItems();
+        }
+
+        function displayCartItems() {
+            const cartItems = document.getElementById('cartItems');
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: #666;">Keranjang kosong 😢</p>';
+            } else {
+                cartItems.innerHTML = cart.map((item, index) => `
+                    <div class="cart-item">
+                        <div>
+                            <strong>${item.name}</strong><br>
+                            <small>Rp ${item.price.toLocaleString()} x ${item.quantity}</small>
+                        </div>
+                        <div>
+                            <button onclick="removeFromCart(${index})" style="background: #dc3545; color: white; border: none; padding: 0.3rem 0.8rem; border-radius: 15px; cursor: pointer; margin-right: 0.5rem;">Hapus</button>
+                            <span style="font-weight: bold; color: #d63384;">Rp ${(item.price * item.quantity).toLocaleString()}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            document.getElementById('cartTotal').textContent = `Rp ${total.toLocaleString()}`;
+            updateOrderSummary();
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCart();
+        }
+
+        function toggleCart() {
+            const modal = document.getElementById('cartModal');
+            modal.style.display = modal.style.display === 'block' ? 'none' : 'block';
+            if (modal.style.display === 'block') {
+                displayCartItems();
+            }
+        }
+
+        // WhatsApp Functions
+        function openWAForm() {
+            document.getElementById('waModal').style.display = 'block';
+            updateOrderSummary();
+        }
+
+        function closeWAForm() {
+            document.getElementById('waModal').style.display = 'none';
+        }
+
+        function directWA(product) {
+            const message = `Halo! Saya mau pesan ${product} 😊`;
+            window.open(`https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+
+        function updateOrderSummary() {
+            const summary = document.getElementById('orderSummary');
+            const summaryList = document.getElementById('summaryList');
+            const summaryTotal = document.getElementById('summaryTotal');
+            
+            if (cart.length > 0) {
+                summary.style.display = 'block';
+                summaryList.innerHTML = cart.map(item => 
+                    `${item.name} (x${item.quantity}) - Rp ${(item.price * item.quantity).toLocaleString()}`
+                ).join('<br>');
+                summaryTotal.textContent = `Rp ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString()}`;
+            } else {
+                summary.style.display = 'none';
+            }
+        }
+
+        // WhatsApp Form Submit
+        document.getElementById('waForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const address = document.getElementById('customerAddress').value;
+            const notes = document.getElementById('orderNotes').value;
+            
+            let message = `🛒 *PESANAN SOFTCOOKIES*\n\n`;
+            message += `👤 *Nama:* ${name}\n`;
+            message += `📱 *WA:* ${phone}\n`;
+            message += `📍 *Alamat:* ${address}\n\n`;
+            
+            if (cart.length > 0) {
+                message += `📦 *Pesanan:*\n`;
+                cart.forEach(item => {
+                    message += `• ${item.name} (x${item.quantity}) - Rp ${(item.price * item.quantity).toLocaleString()}\n`;
+                });
+                message += `\n💰 *Total:* Rp ${cart.reduce((sum, item) => sum + (item.price * item.quantity), 0).toLocaleString()}\n\n`;
+            }
+            
+            message += `📝 *Catatan:* ${notes || 'Tidak ada'}\n\n`;
+            message += `⏰ Pesan pada: ${new Date().toLocaleString('id-ID')}`;
+            
+            const waUrl = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+            window.open(waUrl, '_blank');
+            
+            // Reset form
+            this.reset();
+            closeWAForm();
+            showNotification('Pesanan berhasil dikirim ke WhatsApp! 📱✅');
+        });
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Keranjang kosong!');
+                return;
+            }
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            alert(`Terima kasih! Total pembelian: Rp ${total.toLocaleString()}\nSilakan transfer ke rekening yang tertera di WhatsApp.`);
+            cart = [];
+            updateCart();
+            toggleCart();
+        }
+
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 1rem 2rem;
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+                z-index: 3000;
+                animation: slideIn 0.3s ease;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Smooth scrolling & modal close
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        window.onclick = function(event) {
+            const waModal = document.getElementById('waModal');
+            const cartModal = document.getElementById('cartModal');
+            if (event.target === waModal) {
+                closeWAForm();
+            }
+            if (event.target === cartModal) {
+                toggleCart();
+            }
+        }
+    </script>
+</body>
+</html>
